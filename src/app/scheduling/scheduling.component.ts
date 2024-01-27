@@ -43,6 +43,7 @@ export class SchedulingComponent {
     this.schedulingService.getAll().pipe(
       catchError(error => {
         console.log(error);
+        this.buildNotification("Erro", "Erro ao carregar os dados", "info");
         return of([])
       })
     ).subscribe({

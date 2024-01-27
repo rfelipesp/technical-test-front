@@ -1,0 +1,23 @@
+<div class="login-body">
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <mat-card class="login-card">
+      <mat-card-header class="space-adjust">
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-form-field style="width: 80%;">
+            <input matInput type="text" placeholder="Número da Conta" formControlName="accountNumber"/>
+          </mat-form-field>
+          <mat-form-field style="width: 80%;">
+            <input matInput type="text" placeholder="Senha" formControlName="password"/>
+          </mat-form-field>
+          <div class="space-adjust">
+            <button mat-raised-button color="warn" (click)="onReset()">Limpar</button>
+            <button mat-raised-button color="primary" class="login-btn">Login</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

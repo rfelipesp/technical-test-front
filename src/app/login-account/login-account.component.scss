@@ -1,0 +1,22 @@
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  text-align: center;
+  max-width: 25rem;
+}
+
+.login-btn {
+  background-color:#0bb813
+}
+
+.space-adjust {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}

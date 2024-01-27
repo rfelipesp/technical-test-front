@@ -4,8 +4,8 @@ export interface Scheduling {
   destinationAccount: number;
   transferAmount: number;
   transferRate: string;
-  transferDate: Date;
-  schedulingDate: Date;
+  transferDate: string;
+  schedulingDate: string;
   status: string;
 }
 

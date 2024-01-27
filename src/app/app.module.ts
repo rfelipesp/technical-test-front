@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { SchedulingAccountComponent } from './scheduling/scheduling-account/scheduling-account.component';
+import { LoginAccountComponent } from './login-account/login-account.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { SchedulingAccountComponent } from './scheduling/scheduling-account/sche
     DashboardComponent,
     NotificationComponent,
     SchedulingDetailComponent,
-    SchedulingAccountComponent
+    LoginAccountComponent
   ],
   imports: [
     BrowserModule,

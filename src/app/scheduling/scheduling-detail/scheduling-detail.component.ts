@@ -37,7 +37,8 @@ export class SchedulingDetailComponent {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Scheduling,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private schedulingService: SchedulingService,
+    private schedulingService: SchedulingService
+    ,
   ) {
     this.scheduling = { ...data };
 
@@ -64,10 +65,7 @@ export class SchedulingDetailComponent {
   }
 
   onSubmit() {
-    this.schedulingService.save(this.createScheduling(this.schedulingForm.value)).subscribe(
-      (response: any) => {
-        this.patchScheduling(response.data);
-      });
+    this.dialogRef.close(this.createScheduling(this.schedulingForm));
   }
 
   onCancel() {
@@ -90,20 +88,18 @@ export class SchedulingDetailComponent {
   }
 
   patchScheduling(scheduling: Scheduling) {
+    this.uuid = scheduling.uuid;
     this.transferDate = new Date(scheduling.transferDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
     this.schedulingDate = new Date(scheduling.schedulingDate).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
     this.schedulingForm.patchValue(this.scheduling);
   }
 
   createScheduling(schedulingForm: FormGroup) {
-    this.scheduling.uuid = this.schedulingForm.value.uuid;
-    this.scheduling.originAccount = this.schedulingForm.value.originAccount;
-    this.scheduling.destinationAccount = this.schedulingForm.value.destinationAccount;
-    this.scheduling.transferAmount = this.schedulingForm.value.transferAmount;
-    this.scheduling.transferRate = this.schedulingForm.value.transferRate;
-    this.scheduling.transferDate = this.schedulingForm.value.transferDate;
-    this.scheduling.schedulingDate = this.schedulingForm.value.schedulingDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-    this.scheduling.status = this.schedulingForm.value.status;
+
+    this.scheduling.originAccount = 1000;
+    this.scheduling.destinationAccount = schedulingForm.value.destinationAccount;
+    this.scheduling.transferAmount = schedulingForm.value.transferAmount;
+    this.scheduling.transferDate = this.formatDate(schedulingForm.value.transferDate);
 
     return this.scheduling;
   }
@@ -120,6 +116,17 @@ export class SchedulingDetailComponent {
       return true;
     }
   }
+
+  formatDate(date: Date) {
+
+    var getYear = date.toLocaleString("default", { year: "numeric" });
+    var getMonth = date.toLocaleString("default", { month: "2-digit" });
+    var getDay = date.toLocaleString("default", { day: "2-digit" });
+
+    return getYear + "-" + getMonth + "-" + getDay;
+  }
+
+
 
 }
 

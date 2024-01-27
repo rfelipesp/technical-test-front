@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,6 +9,7 @@ import { Scheduling } from 'src/model/scheduling/scheduling.model';
 import { SchedulingService } from '../service/scheduling.service';
 import { SchedulingDetailComponent } from './scheduling-detail/scheduling-detail.component';
 import { Notification } from 'src/model/api-model/notification.model';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-scheduling',
@@ -17,8 +18,7 @@ import { Notification } from 'src/model/api-model/notification.model';
 })
 export class SchedulingComponent {
 
-  element: string;
-
+  @Input() accountNumber: number;
   notification: Notification;
 
   public displayedColumns = ['destinationAccount', 'transferAmount', 'transferDate', 'schedulingDate', 'status', 'details', 'delete'];
@@ -36,34 +36,58 @@ export class SchedulingComponent {
   }
 
   ngOnInit() {
-
     this.getAll();
   }
 
   getAll() {
-    this.schedulingService.getAll().subscribe({
+    this.schedulingService.getAll().pipe(
+      catchError(error => {
+        console.log(error);
+        return of([])
+      })
+    ).subscribe({
 
       next: (response: any) => {
         this.dataSource = response.data;
-      },
-
-      error: (e) => {
-        console.error(e);
-      },
-
+      }
     });
   }
 
   onAddNewScheduling() {
+
     this.dialog.open(SchedulingDetailComponent, {
       width: '40%',
+
     }).afterClosed().subscribe({
 
+      next: (response: Scheduling) => {
+        if (this.validateForm(response)) {
+          this.schedulingService.save(response).pipe(
+            catchError(error => {
+              console.log(error);
+              this.buildNotification("Erro", "Não foi possível atender a soicitação", "info");
+              return of()
+            })
+          ).subscribe(
+            (response: any) => {
+              if (response.message != 'Success') {
+                this.buildNotification("Erro", "Periodo selecionado inválido", "info");
+              }
+              this.getAll();
+            });
+        }
+      },
     })
   }
 
   onDetails(element: any) {
-    this.schedulingService.getOne(element).subscribe({
+    this.schedulingService.getOne(element).pipe(
+      catchError(error => {
+        console.log(error);
+        this.buildNotification("Erro", "Não foi possível atender a soicitação", "info");
+        return of()
+      })
+    ).subscribe({
 
       next: (response: any) => {
         this.dialog.open(SchedulingDetailComponent, {
@@ -71,53 +95,54 @@ export class SchedulingComponent {
           data: response.data[0]
         })
       },
-
-      error: (e) => {
-        console.log(e);
-      },
-
     });
   }
 
   onDeleteScheduling(id: number) {
-    this.notification = {
-      title: "Cancelar Agendamento",
-      content: "Deseja realmente cancelar o agendamento?",
-      type: "warning"
-    };
-    this.dialog.open(NotificationComponent, {
-      data: this.notification
-    }).afterClosed().subscribe({
+    this.buildNotification("Cancelar Agendamento", "Deseja realmente cancelar o agendamento?", "warning")
+      .afterClosed().subscribe({
 
-      next: (result) => {
-        if (result) {
-          this.schedulingService.delete(id).subscribe({
-
-            next: () => {
-              this.notification = {
-                title: "Cancelamento Realizado",
-                content: "Agendamento cancelado com sucesso!",
-                type: "info"
-              };
-
-              this.dialog.open(NotificationComponent, {
-                data: this.notification
+        next: (result) => {
+          if (result) {
+            this.schedulingService.delete(id).pipe(
+              catchError(error => {
+                console.log(error);
+                this.buildNotification("Erro", "Não foi possível atender a soicitação", "info");
+                return of()
               })
+            ).subscribe({
 
-              this.getAll();
-            },
+              next: () => {
+                this.buildNotification("Cancelamento Realizado", "Agendamento cancelado com sucesso!", "info");
+                this.getAll();
+              },
+            });
+          }
+        },
+      })
+  }
 
-            error: (e) => {
-              console.log(e);
-            },
-          });
-        }
-      },
+  buildNotification(title: string, content: string, type: string) {
+    this.notification = {
+      title: title,
+      content: content,
+      type: type
+    };
 
-      error: (e) => {
-        console.log(e);
-      },
+    return this.dialog.open(NotificationComponent, {
+      data: this.notification
     })
   }
 
+  validateForm(scheduling: Scheduling) {
+    if (
+      scheduling.originAccount != null
+      && scheduling.transferAmount != null
+      && scheduling.transferDate != null
+      && scheduling.originAccount != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

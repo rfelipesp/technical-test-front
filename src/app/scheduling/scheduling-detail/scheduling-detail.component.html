@@ -5,38 +5,38 @@
       <div style="display: inline-block; width: 100%;">
         <mat-form-field *ngIf="isNew == false" style="width: 45%; float: left;">
           <mat-label>Conta de Origem</mat-label>
-          <input matInput formControlName="originAccount">
+          <input matInput formControlName="originAccount" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field style="width: 45%; float: right;">
           <mat-label>Conta de Destino</mat-label>
-          <input matInput formControlName="destinationAccount">
+          <input matInput formControlName="destinationAccount" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field style="width: 45%; float: left;">
           <mat-label>Valor da Transferência</mat-label>
-          <input matInput formControlName="transferAmount">
+          <input matInput formControlName="transferAmount" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field *ngIf="isNew == false" style="width: 45%; float: right;">
           <mat-label>Taxa</mat-label>
-          <input matInput formControlName="transferRate">
+          <input matInput formControlName="transferRate" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field *ngIf="isNew == false" style="width: 45%; float: left;">
           <mat-label>Data da Solicitação</mat-label>
-          <input matInput value="{{transferDate}}">
+          <input matInput value="{{schedulingDate}}" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field *ngIf="isNew == false" style="width: 45%; float: right;">
-          <mat-label>Data Agendada</mat-label>
-          <input matInput value="{{schedulingDate}}">
+          <mat-label>Data do Agendamento</mat-label>
+          <input matInput value="{{transferDate}}" [readonly]="isNew == false">
         </mat-form-field>
         <mat-form-field *ngIf="isNew == true" style="width: 45%; float: right;">
-          <mat-label>Data Agendada</mat-label>
-          <input matInput formControlName="schedulingDate" [matDatepicker]="picker" [min]="minDate">
+          <mat-label>Data do Agendamento</mat-label>
+          <input matInput formControlName="transferDate" [matDatepicker]="picker" [min]="minDate" [readonly]="isNew == true">
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field *ngIf="isNew == false" style="width: 100%;">
           <mat-label>Status da Transferência</mat-label>
-          <input matInput formControlName="status">
+          <input matInput formControlName="status" [readonly]="isNew == false">
         </mat-form-field>
       </div>
     </div>

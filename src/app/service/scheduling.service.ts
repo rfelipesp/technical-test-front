@@ -41,8 +41,8 @@ export class SchedulingService {
       );
   }
 
-  public save(Scheduling: Scheduling) {
-    return this.httpClient.post(`${this.API}`, Scheduling)
+  public save(scheduling: Scheduling) {
+    return this.httpClient.post<ApiResponse[]>(`${this.API}`, scheduling)
       .pipe(
         first(),
         tap(scheduling => console.log(scheduling))

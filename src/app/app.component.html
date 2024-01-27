@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
-    <mat-icon (click)="isExpanded = !isExpanded" class="chevron-button"
-      [style.transform]="!isExpanded ? '':'rotate(180deg)'">chevron_right</mat-icon>
+  <mat-icon (click)="isExpanded = !isExpanded" class="chevron-button"
+    [style.transform]="!isExpanded ? '':'rotate(180deg)'">chevron_right</mat-icon>
   <span class="nav-title">Tokio Technical Test</span>
 </mat-toolbar>
 
@@ -8,8 +8,12 @@
   <mat-sidenav #sidenav mode="side" opened="isExpanded">
     <mat-nav-list>
 
-      <mat-list-item [routerLink]="'scheduling'">
+      <mat-list-item [routerLink]="'dashboard'">
         <mat-icon mat-list-icon>home</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Tela Inicial</span>
+      </mat-list-item>
+      <mat-list-item [routerLink]="'scheduling'">
+        <mat-icon mat-list-icon>schedule</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Agendamentos</span>
       </mat-list-item>
 

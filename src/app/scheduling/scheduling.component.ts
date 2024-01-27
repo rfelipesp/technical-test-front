@@ -17,7 +17,8 @@ import { Notification } from 'src/model/api-model/notification.model';
 })
 export class SchedulingComponent {
 
-  searchForm: FormGroup;
+  element: string;
+
   notification: Notification;
 
   public displayedColumns = ['destinationAccount', 'transferAmount', 'transferDate', 'schedulingDate', 'status', 'details', 'delete'];
@@ -35,6 +36,7 @@ export class SchedulingComponent {
   }
 
   ngOnInit() {
+
     this.getAll();
   }
 
@@ -52,12 +54,20 @@ export class SchedulingComponent {
     });
   }
 
+  onAddNewScheduling() {
+    this.dialog.open(SchedulingDetailComponent, {
+      width: '40%',
+    }).afterClosed().subscribe({
+
+    })
+  }
+
   onDetails(element: any) {
     this.schedulingService.getOne(element).subscribe({
 
       next: (response: any) => {
         this.dialog.open(SchedulingDetailComponent, {
-          width: '100%',
+          width: '40%',
           data: response.data[0]
         })
       },

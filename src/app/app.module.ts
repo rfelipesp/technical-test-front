@@ -17,6 +17,8 @@ import { SchedulingDetailComponent } from './scheduling/scheduling-detail/schedu
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { SchedulingAccountComponent } from './scheduling/scheduling-account/scheduling-account.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     SchedulingComponent,
     DashboardComponent,
     NotificationComponent,
-    SchedulingDetailComponent
+    SchedulingDetailComponent,
+    SchedulingAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
 
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,14 @@
+<div>
+  <h1>Informe o número da conta</h1>
+</div>
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+  <div class="search-form">
+    <mat-form-field class="width-30">
+      <input matInput type="text" placeholder="Número da Conta" formControlName="accountNumber" />
+    </mat-form-field>
+    <button mat-button color="primary" type="submit">
+      <mat-icon class="search-icon-2">search</mat-icon>
+    </button>
+    <button mat-raised-button color="warn" style="margin-left: 2em;" (click)="onReset()">Limpar</button>
+  </div>
+</form>

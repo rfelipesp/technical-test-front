@@ -3,6 +3,9 @@
     <h1>Agendamentos</h1>
   </div>
 
+  <button mat-raised-button color="primary" style="float: right; margin-bottom: 2rem;"
+    (click)="onAddNewScheduling()">Novo Agendamento</button>
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
 
     <ng-container matColumnDef="destinationAccount">
@@ -42,7 +45,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Deletar </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn" (click)="onDeleteScheduling(element.uuid)">
+        <button *ngIf="element.status == 'AGENDADA'" mat-icon-button color="warn" (click)="onDeleteScheduling(element.uuid)">
           <mat-icon class="mat-18">delete</mat-icon>
         </button>
       </td>

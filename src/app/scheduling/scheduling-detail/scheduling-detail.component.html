@@ -1,1 +1,49 @@
-<p>scheduling-detail works!</p>
+<form [formGroup]="schedulingForm">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <div style="text-align: center;">
+    <div mat-dialog-content>
+      <div style="display: inline-block; width: 100%;">
+        <mat-form-field *ngIf="isNew == false" style="width: 45%; float: left;">
+          <mat-label>Conta de Origem</mat-label>
+          <input matInput formControlName="originAccount">
+        </mat-form-field>
+        <mat-form-field style="width: 45%; float: right;">
+          <mat-label>Conta de Destino</mat-label>
+          <input matInput formControlName="destinationAccount">
+        </mat-form-field>
+        <mat-form-field style="width: 45%; float: left;">
+          <mat-label>Valor da Transferência</mat-label>
+          <input matInput formControlName="transferAmount">
+        </mat-form-field>
+        <mat-form-field *ngIf="isNew == false" style="width: 45%; float: right;">
+          <mat-label>Taxa</mat-label>
+          <input matInput formControlName="transferRate">
+        </mat-form-field>
+        <mat-form-field *ngIf="isNew == false" style="width: 45%; float: left;">
+          <mat-label>Data da Solicitação</mat-label>
+          <input matInput value="{{transferDate}}">
+        </mat-form-field>
+        <mat-form-field *ngIf="isNew == false" style="width: 45%; float: right;">
+          <mat-label>Data Agendada</mat-label>
+          <input matInput value="{{schedulingDate}}">
+        </mat-form-field>
+        <mat-form-field *ngIf="isNew == true" style="width: 45%; float: right;">
+          <mat-label>Data Agendada</mat-label>
+          <input matInput formControlName="schedulingDate" [matDatepicker]="picker" [min]="minDate">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field *ngIf="isNew == false" style="width: 100%;">
+          <mat-label>Status da Transferência</mat-label>
+          <input matInput formControlName="status">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions style="float: right;">
+    <button mat-raised-button (click)="onCancel()" mat-raised-button color="warn">{{messageOnClose}}</button>
+    <button *ngIf="uuid == null" mat-raised-button type="submit" color="primary" style="background-color: #0057fa;"
+      (click)="onSubmit()">Salvar</button>
+  </div>
+</form>

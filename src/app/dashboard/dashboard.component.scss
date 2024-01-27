@@ -1,0 +1,22 @@
+.card-content {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  max-width: 80%;
+  height: 80%;
+  margin: 9rem;
+}
+
+.card {
+  height: 80%;
+  width: 90%;
+  border-radius: .5rem;
+  background-color: #f2f5f7;
+  margin: 3rem;
+  box-shadow: 0 .25rem .5rem #d3d4d4;
+}
+
+.text {
+  font-size: 2rem;
+  margin-left: 8rem;
+}

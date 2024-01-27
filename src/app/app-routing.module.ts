@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchedulingComponent } from './scheduling/scheduling.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'scheduling', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+  },
   {
     path: "scheduling",
     component: SchedulingComponent,

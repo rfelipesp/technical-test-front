@@ -1,6 +1,7 @@
 # TechnicalTest
 
 Projeto gerado em Angular na versão 16.2.11.
+
 Foi utilizado Angular Material como biblioteca de componentes na versão 16.2.13.
 
 O projeto se encontra na versão 0.0.0

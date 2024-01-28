@@ -1,27 +1,28 @@
 # TechnicalTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.11.
+Projeto gerado em Angular na versão 16.2.11.
 
-## Development server
+Foi utilizado Angular Material como biblioteca de componentes na versão 16.2.13.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O projeto se encontra na versão 0.0.0
 
-## Code scaffolding
+## O Projeto
+O projeto teve por objetivo implementar um serviço de agendamento de transferências financeiras.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalação e Execução
 
-## Build
+Realizar o download ou clone do projeto através do GitHub e executar os seguintes comandos:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm install
+```
 
-## Running unit tests
+```
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+O projeto será compilado e aberto.
 
-## Running end-to-end tests
+Por padrão Angular, a aplicação roda na porta: http://localhost:4200
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
